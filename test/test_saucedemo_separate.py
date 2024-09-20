@@ -35,8 +35,7 @@ def test_login(page: Page):
     expect(page.locator('.inventory_container'), LOGIN_FAILED_MESSAGE).to_be_visible()
 
     save_data_to_file({'current_url': page.url})
-
-    page.context.storage_state(path="playwright/.auth/state.json")
+    page.context.storage_state(path="test/state.json")
 
 
 def test_add_somesing_to_cart(browser: Browser):
@@ -61,7 +60,7 @@ def test_add_somesing_to_cart(browser: Browser):
     expect(first_item.get_by_role('button', name='Remove'), CART_EMPTY).to_be_visible()
     expect(page.locator('.shopping_cart_badge'), CART_EMPTY).to_be_visible()
 
-    page.context.storage_state(path="playwright/.auth/state.json")
+    page.context.storage_state(path="test/state.json")
     
     item_name = first_item.locator('.inventory_item_name').text_content()
     data['item_name'] = item_name
@@ -93,7 +92,7 @@ def test_checkout_card(browser: Browser):
 
     page.get_by_role('button', name='Checkout').click()
 
-    page.context.storage_state(path="playwright/.auth/state.json")
+    page.context.storage_state(path="test/state.json")
 
     data['current_url'] = page.url
     save_data_to_file(data)
@@ -132,7 +131,7 @@ def test_test_checkout_step_one(browser: Browser):
     # Проверяем подтвердилась ли форма
     expect(page.locator('.checkout_summary_container'), FORM_FALUED).to_be_visible()
 
-    page.context.storage_state(path="playwright/.auth/state.json")
+    page.context.storage_state(path="test/state.json")
 
     data['current_url'] = page.url
     save_data_to_file(data)
@@ -159,7 +158,7 @@ def test_test_checkout_step_two(browser: Browser):
     expect(page.locator('.complete-header')).to_be_visible()
     expect(page.get_by_role('button', name='Back Home')).to_be_visible()
 
-    page.context.storage_state(path="playwright/.auth/state.json")
+    page.context.storage_state(path="test/state.json")
 
     data['current_url'] = page.url
     save_data_to_file(data)
@@ -177,7 +176,7 @@ def test_checkout_complete(browser: Browser):
 
     page.get_by_role('button', name='Back Home').click()
 
-    page.context.storage_state(path="playwright/.auth/state.json")
+    page.context.storage_state(path="test/state.json")
 
     # проверяем что товар на странице доступен
     expect(page.locator('.inventory_item').nth(0), ELEMENTS_NOT_EXIST).to_be_visible()

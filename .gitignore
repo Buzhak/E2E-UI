@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 playwright/.auth/
+data.json
+state.json
