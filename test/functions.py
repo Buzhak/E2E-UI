@@ -13,6 +13,7 @@ def load_data_from_file() -> dict:
         data = json.load(file)
     return data
 
+
 def get_page(browser: Browser, data: dict) -> tuple[Page, BrowserContext]:
     context = browser.new_context(storage_state="test/state.json")
     page = context.new_page()
